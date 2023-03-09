@@ -1,0 +1,95 @@
+h1 {
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+    margin-bottom: 5px
+}
+
+img {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin{
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+p {
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+a {
+    color: rgb(255, 255, 255);
+    font-family: 'Lucida Sans';
+    border: 2px solid rgb(187, 187, 187);
+    text-decoration: none;
+    padding: 7px;  
+    background: rgb(86, 65, 33);
+}
+
+#socials {
+    margin-top: 35px;
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+}
+
+#socials a {
+    color: rgb(255, 255, 255);
+    font-family: 'Lucida Sans';
+    border: 2px solid rgb(187, 187, 187);
+    text-decoration: none;
+    padding: 7px;  
+    background: rgb(33, 61, 86);
+    display: inline-block;
+}
+
+body {
+    background: rgb(0,0,0);
+    background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(43,43,43,1) 100%);
+}
+
+html {
+    height: 100%;
+}
+
+footer {
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+    bottom: 0px;
+    position: absolute;
+    text-align: right;
+    width: 99%;
+}
+
+footer p {
+    margin-right: 0px;
+    padding-right: 20px;
+    text-align: right;
+}
+
+#buttons {
+    margin-top: 35px;
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+}
+
+#buttons a {
+    display: inline-block;
+}
+
+.highlight {
+    color: rgb(51, 175, 175);
+}
