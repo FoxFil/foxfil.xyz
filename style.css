@@ -55,6 +55,23 @@ a {
     display: inline-block;
 }
 
+#donations {
+    margin-top: 35px;
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Lucida Sans';
+}
+
+#donations a {
+    color: rgb(255, 255, 255);
+    font-family: 'Lucida Sans';
+    border: 2px solid rgb(187, 187, 187);
+    text-decoration: none;
+    padding: 7px;  
+    background: rgb(9, 100, 13);
+    display: inline-block;
+}
+
 body {
     background: rgb(0,0,0);
     background: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(43,43,43,1) 100%);
