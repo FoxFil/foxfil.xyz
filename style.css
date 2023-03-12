@@ -36,6 +36,7 @@ a {
     text-decoration: none;
     padding: 7px;  
     background: rgb(86, 65, 33);
+    border-radius: 4px;
 }
 
 #socials {
@@ -53,6 +54,7 @@ a {
     padding: 7px;  
     background: rgb(33, 61, 86);
     display: inline-block;
+    border-radius: 4px;
 }
 
 #donations {
@@ -70,6 +72,7 @@ a {
     padding: 7px;  
     background: rgb(9, 100, 13);
     display: inline-block;
+    border-radius: 4px;
 }
 
 body {
