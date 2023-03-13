@@ -1,7 +1,7 @@
 h1 {
     text-align: center;
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     margin-bottom: 5px
 }
 
@@ -24,19 +24,20 @@ img {
 p {
     text-align: center;
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     margin-left: 25%;
     margin-right: 25%;
 }
 
 a {
     color: rgb(255, 255, 255);
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
     background: rgb(86, 65, 33);
     border-radius: 4px;
+    margin-right: 10px;
 }
 
 a:hover {
@@ -47,12 +48,12 @@ a:hover {
     margin-top: 35px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
 }
 
 #socials a {
     color: rgb(255, 255, 255);
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
@@ -69,12 +70,12 @@ a:hover {
     margin-top: 35px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
 }
 
 #donations a {
     color: rgb(255, 255, 255);
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
@@ -98,7 +99,7 @@ html {
 
 footer {
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
     bottom: 0px;
     position: absolute;
     text-align: right;
@@ -115,7 +116,7 @@ footer p {
     margin-top: 35px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Lucida Sans';
+    font-family: 'Segoe UI';
 }
 
 #buttons a {
