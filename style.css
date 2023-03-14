@@ -1,7 +1,7 @@
 h1 {
     text-align: center;
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     margin-bottom: 5px
 }
 
@@ -24,20 +24,19 @@ img {
 p {
     text-align: center;
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     margin-left: 25%;
     margin-right: 25%;
 }
 
 a {
     color: rgb(255, 255, 255);
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
     background: rgb(86, 65, 33);
     border-radius: 4px;
-    margin-right: 10px;
 }
 
 a:hover {
@@ -48,18 +47,19 @@ a:hover {
     margin-top: 35px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
 }
 
 #socials a {
     color: rgb(255, 255, 255);
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
     background: rgb(33, 61, 86);
     display: inline-block;
     border-radius: 4px;
+    margin-bottom: 5px;
 }
 
 #socials a:hover {
@@ -70,12 +70,12 @@ a:hover {
     margin-top: 35px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
 }
 
 #donations a {
     color: rgb(255, 255, 255);
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
     padding: 7px;  
@@ -99,7 +99,7 @@ html {
 
 footer {
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
     bottom: 0px;
     position: absolute;
     text-align: right;
@@ -113,14 +113,15 @@ footer p {
 }
 
 #buttons {
-    margin-top: 35px;
+    margin-top: 20px;
     text-align: center;
     color: aliceblue;
-    font-family: 'Segoe UI';
+    font-family: sans-serif;
 }
 
 #buttons a {
     display: inline-block;
+    margin-right: 10px;
 }
 
 .highlight {
