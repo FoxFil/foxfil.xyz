@@ -127,3 +127,7 @@ footer p {
 .highlight {
     color: rgb(51, 175, 175);
 }
+
+.highlight_num {
+    color: rgb(53, 196, 115);
+}
