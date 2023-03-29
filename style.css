@@ -30,17 +30,12 @@ p {
 }
 
 a {
-    color: rgb(255, 255, 255);
-    font-family: sans-serif;
-    border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
-    padding: 7px;  
-    background: rgb(86, 65, 33);
-    border-radius: 4px;
+    color: rgb(51, 175, 175);
 }
 
 a:hover {
-    background: rgb(60, 45, 23);
+    text-decoration: underline;
 }
 
 #socials {
@@ -120,8 +115,19 @@ footer p {
 }
 
 #buttons a {
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
+    border: 2px solid rgb(187, 187, 187);
+    text-decoration: none;
+    padding: 7px;  
+    background: rgb(86, 65, 33);
+    border-radius: 4px;
     display: inline-block;
     margin-right: 10px;
+}
+
+#buttons a:hover {
+    background: rgb(60, 45, 23);
 }
 
 .highlight {
