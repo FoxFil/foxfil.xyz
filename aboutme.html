@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>About Me</h1>
-    <p>Hello! My name is <span class="highlight">Philipp</span> and I'm a <b><span class="highlight_num">15</span></b> years old starting programmer. I'm from Russia, <span class="highlight">Moscow</span>.</p>
+    <p>Hello! My name is <span class="highlight">Philipp</span> and I'm a <b><span class="highlight_num"><span id="age"></span></span></b> years old starting programmer. I'm from Russia, <span class="highlight">Moscow</span>.</p>
     <p>I am also a member of <a target=”_blank” rel="noreferrer noopener" href="https://github.com/chftm"><span class="highlight">CHFTM</span></a> programming team.</p>
     <p>I know basics of <a target=”_blank” rel="noreferrer noopener" href="https://www.java.com/"><span class="highlight">Java</span></a> & <a target=”_blank” rel="noreferrer noopener" href="https://html.spec.whatwg.org/"><span class="highlight">HTML</span></a>, but the main language I code with is <a target=”_blank” rel="noreferrer noopener" href="https://www.python.org"><span class="highlight">Python</span></a>.</p>
     <p>In my spare time I like playing games, such as <a target=”_blank” rel="noreferrer noopener" href="https://www.minecraft.net/"><span class="highlight">Minecraft</span></a>. I enjoy travelling a lot, I have visited more than <b><span class="highlight_num">10</span></b> different countries.</p>
@@ -20,11 +20,13 @@
         <a href="index.html">Home</a>
     </div>
     <footer>
-        <p>© FoxFil 2023</p>
+        <p>© FoxFil <span id="year_today"></span></p>
     </footer>
     <script>
     document.getElementById("streak_duo").innerHTML = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158)).toString();
     document.getElementById("streak_wrdl").innerHTML = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-6)).toString();
+    document.getElementById("age").innerHTML = (15 + Math.floor((Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158))/477)).toString();
+    document.getElementById("year_today").innerHTML = (2023 + Math.floor((Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158))/477)).toString();
     </script>
 </body>
 </html>

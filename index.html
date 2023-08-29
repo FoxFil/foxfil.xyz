@@ -18,7 +18,10 @@
         <a href="donate.html">Donate</a>
     </div>
     <footer>
-        <p>© FoxFil 2023</p>
+        <p>© FoxFil <span id="year_today"></span></p>
     </footer>
+    <script>
+    document.getElementById("year_today").innerHTML = (2023 + Math.floor((Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158))/477)).toString();
+    </script>
 </body>
 </html>
