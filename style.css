@@ -135,6 +135,10 @@ footer p {
     color: rgb(51, 175, 175);
 }
 
+.highlight_foxfil {
+    color: rgb(255, 145, 0);
+}
+
 .highlight_num {
     color: rgb(53, 196, 115);
 }
