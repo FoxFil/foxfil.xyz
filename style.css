@@ -138,3 +138,18 @@ footer p {
 .highlight_num {
     color: rgb(53, 196, 115);
 }
+
+#webring {
+    color: aliceblue;
+    font-family: sans-serif;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 99%;
+}
+
+#webring a {
+    color: aliceblue;
+}
