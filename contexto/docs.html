@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Change the description wrt project -->
+  <meta name="description"
+    content="Телеграм бот для игры в аналог Contexto с друзьями!" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- stylesheets -->
+
+  <link rel="stylesheet" href="./public/styles/style.css">
+
+  <!-- You can add your own fonts from fonts.google.com -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+  <!-- Default Script tags -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./public/js/index.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+    };
+  </script>
+
+  <!-- Replace the title name -->
+  <title>Contexto Game Bot</title>
+</head>
+
+<body style="font-family: 'Poppins', sans-serif; min-height: 100vh; display: flex; flex-direction: column;"
+  class="dark:bg-slate-900 bg-white dark:text-white">
+  <!-- Header start here -->
+  <header class="w-full p-3 border-b dark:border-b  flex sticky top-0 z-10 dark:bg-slate-900 bg-white dark:text-white ">
+    <nav
+      class="w-full flex flex-col lg:flex-row md:flex-row sm:flex-row items-start lg:item-center md:item-center sm:item-center lg:justify-between md:justify-between sm:justify-between justify-start dark:text-white">
+      <ul>
+        <!-- You can change your logo name -->
+        <li class="font-mono text-xl">
+          <a href="https://t.me/contexto_gamee_bot">
+          Contexto Game Bot
+        </a>
+        </li>
+      </ul>
+      <ul id="header-nav" class="mr-6 sm:flex md:flex lg:flex hidden">
+        <li class="mr-5 mb-3 mt-5 sm:mb-0 sm:mt-0 md:mb-0 md:mt-0 lg:mb-0 lg:mt-0">
+          <a href="./docs.html">Документация</a>
+        </li>
+        <div>
+          <ul class="flex">
+            <!-- Change the href link to your respective social media accounts-->
+            <li class="mr-5 flex dark:hidden">
+              <p onclick="darkmode()">
+                <img src="./public/svgs/sun.svg" alt="sun Link" />
+              </p>
+            </li>
+            <li class="mr-5 hidden dark:flex">
+              <p onclick="lightmode()">
+                <img src="./public/svgs/sun-dark.svg" alt="sun Link" />
+              </p>
+            </li>
+          </ul>
+        </div>
+      </ul>
+    </nav>
+
+    <div class="sm:hidden flex" onclick="OnclickOpenMenu()" id="open-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+          clip-rule="evenodd" />
+      </svg>
+    </div>
+    <div class="hidden" onclick="OnclickCloseMenu()" id="close-menu">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+  </header>
+  <!-- Header ends here -->
+
+  <div class="flex flex-col md:flex-row lg:flex-row">
+    <!-- Side menu starts here -->
+    <nav class="flex ml-10 mt-7 md:fixed lg:fixed" data-spy="affix" data-offset-top="300" data-offset-bottom="200"
+      role="navigation">
+      <ul class="nav">
+        <li class="font-medium"><a href="#link1">🧠 В чём смысл игры?</a></li>
+        <li class="font-medium">
+          <a href="#link2">🎮 Как играть?</a>
+          <ul class="nav">
+            <li class="text-[#111] dark:text-slate-300 pl-[20px] font-[400] border-l-[2px]">
+              <a href="#link2_1">Шаг 1</a>
+            </li>
+            <li class="text-[#111] dark:text-slate-300 pl-[20px] font-[400] border-l-[2px]">
+              <a href="#link2_2">Шаг 2</a>
+            </li>
+            <li class="text-[#111] dark:text-slate-300 pl-[20px] font-[400] border-l-[2px]">
+              <a href="#link2_3">Шаг 3</a>
+            </li>
+            <li class="text-[#111] dark:text-slate-300 pl-[20px] font-[400] border-l-[2px]">
+              <a href="#link2_4">Другие команды</a>
+            </li>
+          </ul>
+        </li>
+        <li class="font-medium"><a href="#link3">❓   FAQ</a></li>
+        <li class="font-medium">
+          <a href="#link4">🐛 Нашли ошибку?</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- Side Menu ends here -->
+
+    <div class="pl-5 md:pl-[250px] lg:pl-[250px]">
+      <!-- Link1 start -->
+      <section id="link1">
+        <div class="h-full mt-10">
+          <p class="font-normal text-2xl">🧠 В чём смысл игры?</p>
+          <p class="leading-0 w-3/4">
+            Один человек из группы загадывает слово.
+            Бот генерирует изображение, обозначающее загаданное слово, и отправляет его в чат группы.
+            Все участники группы пытаются угадать загаданное слово, а бот на каждый ответ пишет, насколько он близок к верному по смыслу.
+          </p>
+        </div>
+      </section>
+      <!-- Link1 end -->
+
+      <!-- Link2 Start -->
+      <section id="link2">
+        <div class="h-full mt-5">
+          <p class="font-normal text-2xl">🎮 Как играть?</p>
+          <p class="text-sm pb-4">Всё очень просто!</p>
+        </div>
+        <section id="link2_1" class="border-l-[2px]">
+          <div class="h-full mt-3 ml-5">
+            <p class="font-normal text-xl">Шаг 1</p>
+            <p class="leading-0 w-3/4">
+              Выберите ведущего. Он должен написать команду <a target="_blank" class="bg-gray-300 text-slate-700 rounded p-1">/play</a> и нажать на кнопку под появившимся сообщением.
+              Загадывающего перекинет в личные сообщения.</p>
+          </div>
+        </section>
+        <section id="link2_2" class="border-l-[2px]">
+          <div class="h-full mt-5 ml-5">
+            <p class="font-normal text-xl">Шаг 2</p>
+            <p class="leading-0 w-3/4">
+              Если у загадывающего достаточно токенов для игры, бот попросит ввести слово.
+              После ввода слова нужно будет подождать своей очереди.
+              Затем, бот сгенерирует картинку и отправит её в чат, проинформировав вас об этом.
+              Перейдите обратно в чат группы.</p>
+          </div>
+        </section>
+        <section id="link2_3" class="border-l-[2px]">
+          <div class="h-full mt-5 ml-5">
+            <p class="font-normal text-xl">Шаг 3</p>
+            <p class="leading-0 w-3/4">
+              Теперь остальные игроки (участники группы) могут отгадывать загаданное слово, используя команду <a target="_blank" class="bg-gray-300 text-slate-700 rounded p-1">/guess {слово}</a>, <a target="_blank" class="bg-gray-300 text-slate-700 rounded p-1">guess {слово}</a>, либо просто отвечая на сообщения бота.</p>
+          </div>
+        </section>
+        <section id="link2_4" class="border-l-[2px]">
+          <div class="h-full mt-5 ml-5">
+            <p class="font-normal text-xl">Другие команды</p>
+            <p class="leading-0 w-3/4">
+              <a target="_blank" class="bg-gray-300 text-slate-700 rounded p-1">/top {кол-во}</a> - показывает топ самых близких догадок и снова отсылает картинку.</p>
+            <p class="leading-0 w-3/4">
+              <a target="_blank" class="bg-gray-300 text-slate-700 rounded p-1">/stop</a> - остановка игры. Может использовать только тот, кто начал игру.</p>
+          </div>
+        </section>
+      </section>
+      <!-- Link2 Ends -->
+
+      <!-- Link3 start -->
+      <section id="link3">
+        <div class="h-full mt-5">
+          <p class="font-normal text-2xl">❓ FAQ</p>
+          <p class="text-sm pt-5 pb-4">Ответы на популярные вопросы</p>
+          <section id="link2_1" class="border-l-[2px]">
+            <div class="h-full mt-3 ml-5">
+              <p class="font-normal text-xl">💰 Я всё оплатил, но мне не начислились токены!</p>
+              <p class="leading-0 w-3/4">
+                Проверьте, точно ли деньги списались с карты и платёж прошёл. Напишите нам, мы постараемся помочь.</p>
+            </div>
+            <div class="h-full mt-3 ml-5">
+              <p class="font-normal text-xl">🚨 Я загадал слово, но возникла ошибка!</p>
+              <p class="leading-0 w-3/4">
+                Вероятно, вы загадали неприличное слово. Если вы считаете, что загаданное слово - вполне приличное, то просто повторите попытку. Токены не списываются за несгенерированные изображения.</p>
+            </div>
+            <div class="h-full mt-3 ml-5">
+              <p class="font-normal text-xl">💡 У меня есть отличная идея!</p>
+              <p class="leading-0 w-3/4">
+                Супер! Напишите нам, и если идея действительно отличная, мы её добавим! 
+              </div>
+          </section>
+          <br />
+          <a href="https://t.me/foxfil" class="relative inline-block px-4 py-2 font-medium group">
+            <span
+              class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+            <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+            <span class="relative text-black group-hover:text-white">Написать разработчикам</span>
+          </a>
+        </div>
+      </section>
+      <!-- Link3 end -->
+
+      <!-- Link4 start -->
+      <section id="link4">
+        <div class="h-full mt-5">
+          <p class="font-normal text-2xl">🐛 Нашли ошибку?</p>
+          <p class="text-sm pt-2 pb-4">Обязательно сообщите нам!</p>
+        </div>
+        <a href="https://t.me/foxfil" class="relative inline-block px-4 py-2 font-medium group">
+          <span
+            class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+          <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+          <span class="relative text-black group-hover:text-white">Сообщить об ошибке</span>
+        </a>
+
+  <!-- Footer starts here -->
+  <footer style="margin-top: auto;">
+    <div class="dark:bg-white bg-slate-900 h-38 py-1 px-1 mt-5">
+      <div tabindex="0" aria-label="footer"
+        class="focus:outline-none mx-auto container flex flex-col items-center justify-center">
+        <div class="text-black flex flex-col md:items-center f-f-l pt-0">
+          <div class="my-6 text-base text-color f-f-l">
+            <ul class="md:flex items-center">
+              <li class="cursor-pointer pt-4 lg:py-0">
+                <a href="https://t.me/contexto_gamee_bot"
+                  class="text-white dark:text-black focus:outline-none focus:underline hover:text-gray-200">🤖 К боту!
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="text-sm text-color mb-10 f-f-l">
+            <!-- Rename cleandocs with your respective name -->
+            <p tabindex="0" class="text-white dark:text-black focus:outline-none">
+              Остались вопросы? <a href="https://t.me/foxfil" class="text-white dark:text-black focus:outline-none focus:underline hover:text-gray-200">Напишите нам!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Footer ends here -->
+</body>
+
+</html>
