@@ -22,5 +22,20 @@
         <a href="https://otomir23.me/webring"> [webring] </a>
         <a href="https://otomir23.me/webring/9/next"> <span class="highlight">next</span> →</a>
     </div>
+    <div id="remove-fox">Kill the Fox 😕</div>
 </body>
+<script>
+    const logo = document.querySelector('img');
+    const dontPressBtn = document.getElementById('remove-fox');
+  
+    dontPressBtn.addEventListener('click', () => {
+      setTimeout(() => {
+        logo.classList.add('falling');
+        setTimeout(() => {
+            logo.style.display = 'none';
+            dontPressBtn.style.display = 'none';
+        }, 2000);
+      }, 100);
+    });
+  </script>
 </html>

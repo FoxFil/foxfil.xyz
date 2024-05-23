@@ -120,7 +120,7 @@ footer p {
     font-family: sans-serif;
     border: 2px solid rgb(187, 187, 187);
     text-decoration: none;
-    padding: 7px;  
+    padding: 7px;
     background: rgb(86, 65, 33);
     border-radius: 4px;
     display: inline-block;
@@ -156,4 +156,32 @@ footer p {
 
 #webring a {
     color: aliceblue;
+}
+
+
+#remove-fox {
+    font-family: sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-decoration: none;
+    color: rgb(51, 175, 175);
+    font-size: 0.75rem;
+}
+
+#remove-fox:hover {
+    text-decoration: underline;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.falling {
+  animation: fall 2s forwards;
 }
