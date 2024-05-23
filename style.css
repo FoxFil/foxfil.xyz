@@ -161,7 +161,7 @@ footer p {
 
 #remove-fox {
     font-family: sans-serif;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     text-decoration: none;
