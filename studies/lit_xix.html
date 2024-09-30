@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Литература в XIX веке</title>
+    <link rel="stylesheet" href="styles_lit.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Литература в XIX веке</h1>
+        <div class="timeline">
+            <input type="range" min="1800" max="1890" step="10" value="1800" id="timelineRange">
+            <div class="decades">
+                <span>1800</span><span>1810</span><span>1820</span><span>1830</span><span>1840</span>
+                <span>1850</span><span>1860</span><span>1870</span><span>1880</span><span>1890</span>
+            </div>
+        </div>
+        <div class="info">
+            <h2><span id="yearLabel">1800</span>-е годы</h2>
+            <div id="decadeInfo" class="decade-content">
+                <!-- Информация о десятилетии будет здесь -->
+            </div>
+        </div>
+    </div>
+    <script src="script_lit.js"></script>
+</body>
+</html>

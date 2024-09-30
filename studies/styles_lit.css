@@ -1,0 +1,96 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.timeline {
+    margin: 20px 0;
+    position: relative;
+}
+
+input[type="range"] {
+    width: 100%;
+    margin: 0 10px;
+}
+
+.decades {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+    font-size: 1em;
+    color: #444;
+}
+
+.info {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.decade-content {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.subblock {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.subblock h3 {
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.subblock p {
+    margin: 5px 0;
+}
+
+#yearLabel {
+    color: #0073e6;
+}
+
+/* Разделение на зарубежную и российскую литературу */
+.section-title {
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #555;
+    font-weight: bold;
+}
+
+/* Окраска блоков для каждой секции */
+.literature {
+    background-color: #e0f7fa;
+}
+.dates {
+    background-color: #ffecb3;
+}
+.movements {
+    background-color: #f3e5f5;
+}
+.philosophy {
+    background-color: #dcedc8;
+}
