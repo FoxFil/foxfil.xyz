@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const yearLabel = document.getElementById("yearLabel");
     const decadeInfo = document.getElementById("decadeInfo");
 
-    // Данные о литературе для каждого десятилетия
     const literatureData = {
         1800: {
             title: "1800-1810 гг.",
