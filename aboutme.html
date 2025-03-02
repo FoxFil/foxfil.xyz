@@ -25,9 +25,17 @@
         <a href="https://otomir23.me/webring/9/next"> <span class="highlight">next</span> →</a>
     </div>
     <script>
-    document.getElementById("streak_duo").innerHTML = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158)).toString();
-    document.getElementById("streak_wrdl").innerHTML = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-6)).toString();
-    document.getElementById("age").innerHTML = (15 + Math.floor((Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158))/477)).toString();
+    document.getElementById("streak_duo").textContent = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158)).toString();
+    const birthDate = new Date(2008, 1, 9);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    if (today.getMonth() < birthDate.getMonth() || 
+        (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    document.getElementById("age").textContent = age;
     </script>
 </body>
 </html>
