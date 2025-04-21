@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="pics/avatar.jpg">
-    <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="pics/avatar.jpg">
 </head>
 <body>
-    <img src="pics/avatar.jpg" alt="avatar">
-    <h1>Hey! I'm <span class="highlight_foxfil">FoxFil</span>.</h1>
-    <p>Welcome to my website.</p>
-    <div id="buttons">
-        <a href="aboutme">About Me</a>
-        <a href="socials">Socials</a>
-        <a href="donate">Donate</a>
-    </div>
-    <div id="webring">
-        <a href="https://otomir23.me/webring/9/prev">← <span class="highlight">prev</span> </a>
-        <a href="https://otomir23.me/webring"> [webring] </a>
-        <a href="https://otomir23.me/webring/9/next"> <span class="highlight">next</span> →</a>
-    </div>
-    <div id="remove-fox">Kill the Fox 😕</div>
+  <header>
+    <nav>
+      <a href="https://foxfil.xyz" class="menu-button active">Home</a>
+      <a href="https://foxfil.xyz/about" class="menu-button">About me</a>
+      <a href="https://foxfil.xyz/contacts" class="menu-button">Contacts</a>
+    </nav>
+  </header>
+  <main>
+    <h1>
+      Hey, I'm <span class="gradient-text-1">FoxFil</span>
+    </h1>
+      <p id="subtext" class="typing"></p>
+  </main>
+  <footer>
+    <nav>
+      <a href="https://otomir23.me/webring/9/prev" class="footer-button">← prev</a>
+      <a href="https://otomir23.me/webring" class="footer-button">[webring]</a>
+      <a href="https://otomir23.me/webring/9/next" class="footer-button">next →</a>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-<script>
-    const logo = document.querySelector('img');
-    const dontPressBtn = document.getElementById('remove-fox');
-  
-    dontPressBtn.addEventListener('click', () => {
-      setTimeout(() => {
-        logo.classList.add('falling');
-        setTimeout(() => {
-            logo.style.display = 'none';
-            dontPressBtn.style.display = 'none';
-        }, 2000);
-      }, 100);
-    });
-  </script>
 </html>

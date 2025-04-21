@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="pics/avatar.jpg">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="https://foxfil.xyz" class="menu-button">Home</a>
+      <a href="https://foxfil.xyz/about" class="menu-button active">About me</a>
+      <a href="https://foxfil.xyz/contacts" class="menu-button">Contacts</a>
+    </nav>
+  </header>
+  <main>
+    <div class="about-container">
+        <p>Hi! 👋 My real name is Philipp, but in the Internet people know me as FoxFil. I'm a student from Moscow, Russia with a strong interest in Computer Science and Mathematics. I'm still not sure about what field in IT is the most appealing to me, but I'm always looking for new challenges and opportunities to learn new things. Okay, lol, this is starting to sound like a motivation letter now, so I better continue to the next paragraph.</p> 
+        <p>I use Windows 11 (💀) and the main language I code with is Python. I also know basics of some other languages, like HTML, as you can see. I like participating in hackathons and programming related competitions, either alone or with friends. I also really like developing some fun little projects for myself.</p>
+        <p>When I'm not coding, I like to go outside and touch some grass. 🌳 To be more precise, I'm addicted to Geocaching, which is a worldwide treasure hunt game. Basically players hide containers all over the world for other players to find. This is my biggest hobby, that's why I decided to dedicate it a whole paragraph, haha. Go try it out, it's so much fun!</p> 
+        <p>In my spare time I also like to play video games, watch Youtube, films and series and listen to music. 🎮 I enjoy playing co-op games on Steam with my friends, as well as Minecraft and GeoGuessr sometimes. It's hard for me to choose my favorite movie or series, but I'm currently watching Black Mirror and damn, I like it so much. As for the music, my top Russian artists are Noize MC, Oxxxymiron, Monetochka, and others, but I also listen to Imagine Dragons, twenty one pilots, Arrested Youth, AJR, and many more.</p>
+        <p>Oh, and I forgot to show off a bit - I have <span id="streak_duo"></span> day streak in Duolingo (he's holding my family hostage). Though I have to admit that it doesn't really help me study languages, but it still gives you a nice vocabulary bonus. By the way, as for the languages, I obviously know Russian, I have C1 (advanced) in English, and B1 (intermediate) in French. 🥖</p>
+        <p>I think that's all for now, feel free to contact me if you need something, and good luck!</p>
+    </div>
+  </main>
+  <footer>
+    <nav>
+      <a href="https://otomir23.me/webring/9/prev" class="footer-button">← prev</a>
+      <a href="https://otomir23.me/webring" class="footer-button">[webring]</a>
+      <a href="https://otomir23.me/webring/9/next" class="footer-button">next →</a>
+    </nav>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("streak_duo").textContent = (Math.floor(parseInt(Date.parse(Date()))/(24*3600*1000))-(19443-158)).toString();
+  </script>
+</body>
+</html>

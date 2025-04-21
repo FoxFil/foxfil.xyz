@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    font-family: 'Lexend', sans-serif;
+    background: var(--bg);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    padding: 20px; /* prevent text from touching edges */
+    box-sizing: border-box;
+  }
+  
+  h1, p, nav {
+    text-align: center;
+  }
+  
+  nav {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap; /* allow wrapping on small screens */
+  }
+  
+  .menu-button {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 6vw; /* responsive size */
+    font-weight: 700;
+    transition: color 0.3s, transform 0.3s;
+    margin-top: 20px;
+    word-break: break-word;
+  }
+  
+  main p {
+    font-size: 5vw;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .tranparenty-text {
+    color: rgba(255, 255, 255, 0.6);
+    margin-right: 5px;
+  }
+  
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .fa-fw {
+    color: rgba(255, 255, 255, 0.6);
+    width: 1.2em;
+  }
+  
+  .menu-button.active {
+    color: #FFFFFF;
+  }
+  
+  .menu-button:hover {
+    color: #FFFFFF;
+    transform: translateY(-5px);
+    text-decoration: none;
+  }
+  
+  h1 {
+    font-size: 8vw; /* scales with screen width */
+    margin: 0;
+    word-wrap: break-word;
+  }
+  
+  p {
+    font-size: 5vw; /* scales with screen width */
+    margin-top: 10px;
+  }
+  
+  .footer-button {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 4.5vw; /* responsive */
+    transition: color 0.3s, transform 0.3s;
+    margin-bottom: 20px;
+  }
+  
+  .footer-button:hover {
+    color: #FFFFFF;
+    transform: translateY(-5px);
+    text-decoration: none;
+  }
+  
+  .about-container {
+    padding: 0 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .about-container p {
+    font-size: 3vw;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .gradient-text-1 {
+    font-size: inherit;
+    font-weight: bold;
+    background: linear-gradient(90deg, #146444, #145364, #146444, #145364);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-animate 3s infinite linear;
+  }
+  
+  @keyframes gradient-animate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .typing {
+    font-size: 5vw;
+    white-space: normal; /* allow wrapping */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    border-right: 2px solid #FFFFFF;
+    animation: blink-cursor 0.7s step-end infinite;
+    max-width: 100%;
+    padding: 0 10px; /* extra space from edges */
+    box-sizing: border-box;
+  }
+  
+  @keyframes blink-cursor {
+    from { border-right-color: rgba(255, 255, 255, 0); }
+    to { border-right-color: #FFFFFF; }
+  }
+  
+  /* Media query for tablets and up */
+  @media screen and (min-width: 600px) {
+    .menu-button {
+      font-size: 25px;
+    }
+  
+    h1 {
+      font-size: 60px;
+    }
+  
+    p, .typing {
+      font-size: 25px;
+    }
+  
+    .footer-button {
+      font-size: 20px;
+    }
+  
+    main p {
+      font-size: 22px;
+    }
+  
+    .about-container p {
+      font-size: 13px;
+    }
+  }
+  
+  
+  /* 2. Светлая тема по умолчанию */
+  :root {
+    --bg: #FA742D;      /* фон */   /* текст/иконки на оранжевом */
+  }
+  
+  /* 3. Тёмная тема включается автоматически,
+      если в системе/на телефоне выбран Dark Mode */
+  @media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #000000;
+    }
+  }
