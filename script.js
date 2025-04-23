@@ -23,47 +23,46 @@ const phrases = [
     "⠀GeoGuessr enjoyer⠀",
     "⠀I like to develop random stuff⠀",
     "⠀Bombardiro Crocodillo versus Tralalero Tralala 🐊🦈⠀",
+    "⠀TmV2ZXIgZ29ubmEgZ2l2ZSB5b3UgdXA=⠀",
+    "⠀I've seen you before, stranger...⠀",
+    "⠀🐷 #TechnobladeNeverDies⠀",
+    "⠀No one asked⠀",
+    "⠀Who cares?⠀", 
+    "⠀Авиасейлс - сервис для покупки дешёвых авиабилетов ✈️⠀",
   ];
   
   function typeEffect(element, phrases, typingDelay = 70, erasingDelay = 20, pauseDelay = 2000) {
-    let currentPhrase = ""; // Store the current phrase
-    let charIndex = 0; // Index for the current character in the phrase
-    let isDeleting = false; // Flag to indicate whether we are typing or deleting
+    let currentPhrase = "";
+    let charIndex = 0; 
+    let isDeleting = false; 
   
     function getRandomPhrase(previousPhrase) {
       let randomPhrase;
       do {
         randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-      } while (randomPhrase === previousPhrase); // Ensure it's not the same as the last one
+      } while (randomPhrase === previousPhrase);
       return randomPhrase;
     }
   
     function type() {
       if (!currentPhrase) {
-        // Select the initial phrase randomly
         currentPhrase = getRandomPhrase("");
       }
   
       if (isDeleting) {
-        // Delete characters
         element.textContent = currentPhrase.substring(0, charIndex--);
       } else {
-        // Type characters
         element.textContent = currentPhrase.substring(0, charIndex++);
       }
   
-      // Check if we finished typing or deleting
       if (!isDeleting && charIndex === currentPhrase.length) {
-        // Wait before deleting
         setTimeout(() => (isDeleting = true), pauseDelay);
       } else if (isDeleting && charIndex === 1) {
-        // Pick a new random phrase
         const previousPhrase = currentPhrase;
         currentPhrase = getRandomPhrase(previousPhrase);
         isDeleting = false;
       }
   
-      // Set the delay for typing or deleting
       const delay = isDeleting ? erasingDelay : typingDelay;
       setTimeout(type, delay);
     }
@@ -71,8 +70,6 @@ const phrases = [
     type();
   }
   
-  // Get the subtext element
   const subtextElement = document.getElementById("subtext");
   
-  // Start the typing effect
   typeEffect(subtextElement, phrases);

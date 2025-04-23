@@ -8,7 +8,7 @@ body {
     align-items: center;
     justify-content: space-between;
     min-height: 100vh;
-    padding: 20px; /* prevent text from touching edges */
+    padding: 20px;
     box-sizing: border-box;
   }
   
@@ -20,12 +20,12 @@ body {
     display: flex;
     gap: 30px;
     justify-content: center;
-    flex-wrap: wrap; /* allow wrapping on small screens */
+    flex-wrap: wrap;
   }
   
   .menu-button {
     color: rgba(255, 255, 255, 0.4);
-    font-size: 6vw; /* responsive size */
+    font-size: 6vw;
     font-weight: 700;
     transition: color 0.3s, transform 0.3s;
     margin-top: 20px;
@@ -68,19 +68,19 @@ body {
   }
   
   h1 {
-    font-size: 8vw; /* scales with screen width */
+    font-size: 8vw;
     margin: 0;
     word-wrap: break-word;
   }
   
   p {
-    font-size: 5vw; /* scales with screen width */
+    font-size: 5vw;
     margin-top: 10px;
   }
   
   .footer-button {
     color: rgba(255, 255, 255, 0.4);
-    font-size: 4.5vw; /* responsive */
+    font-size: 4.5vw;
     transition: color 0.3s, transform 0.3s;
     margin-bottom: 20px;
   }
@@ -123,13 +123,13 @@ body {
   
   .typing {
     font-size: 5vw;
-    white-space: normal; /* allow wrapping */
+    white-space: normal;
     overflow-wrap: break-word;
     word-break: break-word;
     border-right: 2px solid #FFFFFF;
     animation: blink-cursor 0.7s step-end infinite;
     max-width: 100%;
-    padding: 0 10px; /* extra space from edges */
+    padding: 0 10px;
     box-sizing: border-box;
   }
   
@@ -138,7 +138,6 @@ body {
     to { border-right-color: #FFFFFF; }
   }
   
-  /* Media query for tablets and up */
   @media screen and (min-width: 600px) {
     .menu-button {
       font-size: 25px;
@@ -166,13 +165,10 @@ body {
   }
   
   
-  /* 2. Светлая тема по умолчанию */
   :root {
-    --bg: #FA742D;      /* фон */   /* текст/иконки на оранжевом */
+    --bg: #FA742D;
   }
   
-  /* 3. Тёмная тема включается автоматически,
-      если в системе/на телефоне выбран Dark Mode */
   @media (prefers-color-scheme: dark) {
     :root {
         --bg: #000000;
