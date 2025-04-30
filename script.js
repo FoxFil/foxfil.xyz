@@ -28,6 +28,7 @@ const phrases = [
     "🐷 #TechnobladeNeverDies",
     "No one asked",
     "Who cares?",
+    "🌏 I use multi-million dollar satellites to find tupperware in the woods. And what's your hobby?",
   ];
   
   function typeEffect(element, phrases, typingDelay = 70, erasingDelay = 20, pauseDelay = 2000) {
