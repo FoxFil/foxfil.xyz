@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!-- This website is mostly vibe-coded using Claude Sonnet 4.5 -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Grades Calculator S1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+
+        .subject-selector {
+            margin-bottom: 40px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .inputs-section {
+            margin-bottom: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input[type="number"]:invalid {
+            border-color: #ff6b6b;
+        }
+
+        .progress-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-label {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .progress-container {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-bar {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 30px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0) 100%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            z-index: 1;
+        }
+
+        .score-display {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .homework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .footer em {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Courses Grades Calculator S1</h1>
+        
+        <div class="subject-selector">
+            <label for="subject">Select Your Course:</label>
+            <select id="subject">
+                <option value="">-- Choose a course --</option>
+                <option value="analysis">Introduction to Analysis</option>
+                <option value="linear-algebra">Linear Algebra</option>
+                <option value="how-to-write-maths">Math in Practice: How to Write Mathematics</option>
+                <option value="physics">Physics I: Mechanics and Heat</option>
+                <option value="economics">Introduction to Economics</option>
+                <option value="computer-science">Introduction to Computer Programming</option>
+            </select>
+        </div>
+
+        <div id="physics-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Homework 1 (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Homework 2 (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Homework 3 (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Homework 4 (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Homework 5 (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Group Project (4%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="4" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Participation (6%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="6" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Midterm (30%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="30" class="physics-input">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam (40%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="40" class="physics-input">
+                </div>
+            </div>
+        </div>
+
+        <div id="linear-algebra-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Short Test 1 (15%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="15" class="linear-algebra-input">
+                </div>
+                <div class="input-group">
+                    <label>Short Test 2 (15%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="15" class="linear-algebra-input">
+                </div>
+                <div class="input-group">
+                    <label>Midterm (20%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="20" class="linear-algebra-input">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam (50%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="50" class="linear-algebra-input">
+                </div>
+            </div>
+        </div>
+
+        <div id="economics-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Homework (10%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="10" class="economics-input">
+                </div>
+                <div class="input-group">
+                    <label>Midterm (20%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="20" class="economics-input">
+                </div>
+                <div class="input-group">
+                    <label>Participation (20%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="20" class="economics-input">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam (50%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="50" class="economics-input">
+                </div>
+            </div>
+        </div>
+
+        <div id="computer-science-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Live Coding Test 1 (15%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="15" class="cs-input">
+                </div>
+                <div class="input-group">
+                    <label>Live Coding Test 2 (15%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="15" class="cs-input">
+                </div>
+                <div class="input-group">
+                    <label>Participation (30%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="30" class="cs-input">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam (40%)</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" data-weight="40" class="cs-input">
+                </div>
+            </div>
+        </div>
+
+        <div id="how-to-write-maths-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Quiz 1</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 2</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 3</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 4</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 5</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 6</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Quiz 7</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
+                </div>
+                <div class="input-group">
+                    <label>Midterm</label>
+                    <input type="number" min="0" max="40" step="0.01" value="0" id="maths-midterm">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam</label>
+                    <input type="number" min="0" max="100" step="0.01" value="0" id="maths-final">
+                </div>
+            </div>
+        </div>
+
+        <div id="analysis-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <p style="text-align: center; font-size: 18px; color: #888; padding: 40px 20px;">
+                No one knows the formula except for Pacard 🤫
+            </p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-label">Current Grade Progress</div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-text" id="progressText">0.00 / 20</div>
+            </div>
+            <div class="score-display" id="scoreDisplay">
+                0.00 points earned out of 20 (0.00%)
+            </div>
+        </div>
+
+        <div class="footer">
+            This website was mostly <em>~vibe~</em>coded
+        </div>
+    </div>
+
+    <script>
+        const subjectSelect = document.getElementById('subject');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+
+        const sections = {
+            'physics': document.getElementById('physics-inputs'),
+            'linear-algebra': document.getElementById('linear-algebra-inputs'),
+            'economics': document.getElementById('economics-inputs'),
+            'computer-science': document.getElementById('computer-science-inputs'),
+            'how-to-write-maths': document.getElementById('how-to-write-maths-inputs'),
+            'analysis': document.getElementById('analysis-inputs')
+        };
+
+        subjectSelect.addEventListener('change', function() {
+            Object.values(sections).forEach(section => section.classList.add('hidden'));
+            
+            if (this.value) {
+                sections[this.value].classList.remove('hidden');
+                if (this.value === 'analysis') {
+                    updateProgress(0);
+                } else {
+                    calculateGrade(this.value);
+                }
+            } else {
+                updateProgress(0);
+            }
+        });
+
+        Object.keys(sections).forEach(subject => {
+            if (subject === 'analysis') return; // Skip Analysis as it has no calculation
+            
+            const inputs = sections[subject].querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => calculateGrade(subject));
+            });
+        });
+
+        function calculateGrade(subject) {
+            if (subject === 'how-to-write-maths') {
+                calculateMathsGrade();
+                return;
+            }
+
+            const inputs = sections[subject].querySelectorAll('input');
+            let totalPoints = 0;
+            let hasInvalidInput = false;
+
+            inputs.forEach(input => {
+                const score = parseFloat(input.value) || 0;
+                
+                // Check if value is invalid (negative or > 20)
+                if (score < 0 || score > 20) {
+                    hasInvalidInput = true;
+                    return;
+                }
+                
+                const weight = parseFloat(input.dataset.weight);
+                totalPoints += (score / 20) * weight;
+            });
+
+            // Only update if all inputs are valid
+            if (!hasInvalidInput) {
+                const gradeOutOf20 = (totalPoints / 100) * 20;
+                updateProgress(gradeOutOf20);
+            }
+        }
+
+        function calculateMathsGrade() {
+            const quizInputs = document.querySelectorAll('.maths-quiz');
+            const midtermInput = document.getElementById('maths-midterm');
+            const finalInput = document.getElementById('maths-final');
+
+            const quizScores = Array.from(quizInputs).map(input => parseFloat(input.value) || 0);
+            const midterm = parseFloat(midtermInput.value) || 0;
+            const final = parseFloat(finalInput.value) || 0;
+
+            // Validate inputs
+            let hasInvalidInput = false;
+            quizScores.forEach(score => {
+                if (score < 0 || score > 10) hasInvalidInput = true;
+            });
+            if (midterm < 0 || midterm > 40) hasInvalidInput = true;
+            if (final < 0 || final > 100) hasInvalidInput = true;
+
+            if (hasInvalidInput) return;
+
+            // Sort quiz scores and get the 5 best (drop 2 lowest)
+            const sortedQuizzes = [...quizScores].sort((a, b) => b - a);
+            const bestFiveQuizzes = sortedQuizzes.slice(0, 5);
+
+            // Calculate Formula 1: Each quiz * (2/45), midterm * (1/9), final * (6/9)
+            const formula1Quizzes = bestFiveQuizzes.reduce((sum, q) => sum + (q / 10) * (2 / 45), 0);
+            const formula1Midterm = (midterm / 40) * (1 / 9);
+            const formula1Final = (final / 100) * (6 / 9);
+            const formula1Total = (formula1Quizzes + formula1Midterm + formula1Final) * 20;
+
+            // Calculate Formula 2: Each quiz * (1/15), midterm * (1/6), final * (1/2)
+            const formula2Quizzes = bestFiveQuizzes.reduce((sum, q) => sum + (q / 10) * (1 / 15), 0);
+            const formula2Midterm = (midterm / 40) * (1 / 6);
+            const formula2Final = (final / 100) * (1 / 2);
+            const formula2Total = (formula2Quizzes + formula2Midterm + formula2Final) * 20;
+
+            // Take the maximum of the two formulas
+            const finalGrade = Math.max(formula1Total, formula2Total);
+            updateProgress(finalGrade);
+        }
+
+        function updateProgress(points) {
+            const percentage = (points / 20) * 100;
+            progressBar.style.width = percentage + '%';
+            progressText.textContent = points.toFixed(2) + ' / 20';
+            scoreDisplay.textContent = `${points.toFixed(2)} points earned out of 20 (${percentage.toFixed(2)}%)`;
+        }
+
+        updateProgress(0);
+    </script>
+</body>
+</html>
