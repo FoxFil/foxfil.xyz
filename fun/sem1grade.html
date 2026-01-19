@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- This website is mostly vibe-coded using Claude Sonnet 4.5 -->
+<!-- This page was mostly vibe-coded using Claude Sonnet 4.5 -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Courses Grades Calculator S1</title>
+    <title>S1 Courses Grades Calculator</title>
     <style>
         * {
             margin: 0;
@@ -198,6 +198,7 @@
                 <option value="analysis">Introduction to Analysis</option>
                 <option value="linear-algebra">Linear Algebra</option>
                 <option value="how-to-write-maths">Math in Practice: How to Write Mathematics</option>
+                <option value="calculus">Math in Practice: Calculus</option>
                 <option value="physics">Physics I: Mechanics and Heat</option>
                 <option value="economics">Introduction to Economics</option>
                 <option value="computer-science">Introduction to Computer Programming</option>
@@ -316,40 +317,62 @@
             <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
             <div class="homework-grid">
                 <div class="input-group">
-                    <label>Quiz 1</label>
+                    <label>Quiz 1 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 2</label>
+                    <label>Quiz 2 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 3</label>
+                    <label>Quiz 3 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 4</label>
+                    <label>Quiz 4 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 5</label>
+                    <label>Quiz 5 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 6</label>
+                    <label>Quiz 6 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Quiz 7</label>
+                    <label>Quiz 7 (out of 10)</label>
                     <input type="number" min="0" max="10" step="0.01" value="0" class="maths-quiz">
                 </div>
                 <div class="input-group">
-                    <label>Midterm</label>
+                    <label>Midterm (out of 40)</label>
                     <input type="number" min="0" max="40" step="0.01" value="0" id="maths-midterm">
                 </div>
                 <div class="input-group">
-                    <label>Final Exam</label>
+                    <label>Final Exam (out of 100)</label>
                     <input type="number" min="0" max="100" step="0.01" value="0" id="maths-final">
+                </div>
+            </div>
+        </div>
+
+        <div id="calculus-inputs" class="inputs-section hidden">
+            <h2 style="margin-bottom: 20px; color: #667eea;">Components</h2>
+            <div class="homework-grid">
+                <div class="input-group">
+                    <label>Test 1 (out of 10)</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="calculus-test">
+                </div>
+                <div class="input-group">
+                    <label>Test 2 (out of 10)</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="calculus-test">
+                </div>
+                <div class="input-group">
+                    <label>Test 3 (out of 10)</label>
+                    <input type="number" min="0" max="10" step="0.01" value="0" class="calculus-test">
+                </div>
+                <div class="input-group">
+                    <label>Final Exam</label>
+                    <input type="number" min="0" max="20" step="0.01" value="0" id="calculus-final">
                 </div>
             </div>
         </div>
@@ -373,7 +396,7 @@
         </div>
 
         <div class="footer">
-            This website was mostly <em>~vibe~</em>coded
+            This website was mostly <em>~vibe~</em>coded using Claude Sonnet 4.5
         </div>
     </div>
 
@@ -389,6 +412,7 @@
             'economics': document.getElementById('economics-inputs'),
             'computer-science': document.getElementById('computer-science-inputs'),
             'how-to-write-maths': document.getElementById('how-to-write-maths-inputs'),
+            'calculus': document.getElementById('calculus-inputs'),
             'analysis': document.getElementById('analysis-inputs')
         };
 
@@ -419,6 +443,10 @@
         function calculateGrade(subject) {
             if (subject === 'how-to-write-maths') {
                 calculateMathsGrade();
+                return;
+            }
+            if (subject === 'calculus') {
+                calculateCalculusGrade();
                 return;
             }
 
@@ -480,6 +508,35 @@
             const formula2Midterm = (midterm / 40) * (1 / 6);
             const formula2Final = (final / 100) * (1 / 2);
             const formula2Total = (formula2Quizzes + formula2Midterm + formula2Final) * 20;
+
+            // Take the maximum of the two formulas
+            const finalGrade = Math.max(formula1Total, formula2Total);
+            updateProgress(finalGrade);
+        }
+
+        function calculateCalculusGrade() {
+            const testInputs = document.querySelectorAll('.calculus-test');
+            const finalInput = document.getElementById('calculus-final');
+
+            const testScores = Array.from(testInputs).map(input => parseFloat(input.value) || 0);
+            const final = parseFloat(finalInput.value) || 0;
+
+            // Validate inputs
+            let hasInvalidInput = false;
+            testScores.forEach(score => {
+                if (score < 0 || score > 10) hasInvalidInput = true;
+            });
+            if (final < 0 || final > 20) hasInvalidInput = true;
+
+            if (hasInvalidInput) return;
+
+            // Formula 1: Each test 10% (total 30%) + final exam 70%
+            const formula1Tests = testScores.reduce((sum, t) => sum + (t / 10) * 0.10, 0);
+            const formula1Final = (final / 20) * 0.70;
+            const formula1Total = (formula1Tests + formula1Final) * 20;
+
+            // Formula 2: 100% final exam
+            const formula2Total = final;
 
             // Take the maximum of the two formulas
             const finalGrade = Math.max(formula1Total, formula2Total);
