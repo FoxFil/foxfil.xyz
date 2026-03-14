@@ -1,37 +1,538 @@
+<!-- This page was mostly vibecoded using Claude Sonnet 4.6 :) -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Main page of FoxFil's website with a cool gradient and some random phrases.">
-  <meta property="og:image" content="pics/avatar.jpg">
-  <title>Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="pics/avatar.jpg">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<meta name="description" content="FoxFil's website">
+<meta property="og:image" content="pics/MeNerd.jpg">
+<link rel="icon" href="pics/avatar.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #111;
+    color: #ccc;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.85;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Sections */
+  .section {
+    padding: 3.5rem 0;
+    border-top: 1px solid #222;
+    display: grid;
+    grid-template-columns: 1fr 180px;
+    gap: 2.5rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .section:first-child { border-top: none; padding-top: 5rem; }
+  .section.visible { opacity: 1; transform: none; }
+  .section:nth-child(even) { grid-template-columns: 180px 1fr; }
+  .section:nth-child(even) .photo { order: -1; }
+  .section p { color: #bbb; font-size: 1rem; }
+
+  .intro-line {
+    display: block;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+  .intro-line span { color: #f97316; }
+
+  /* Photo card */
+  .photo { display: flex; justify-content: center; padding-top: 0.5rem; }
+
+  .photo-card {
+    position: relative;
+    width: 165px;
+    transition: transform 0.3s ease;
+  }
+
+  .photo-card:hover { transform: rotate(0deg) scale(1.06) !important; }
+  .photo-card:hover .arrow { opacity: 1; }
+
+  .polaroid {
+    background: #eee;
+    padding: 8px 8px 22px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    width: 165px;
+    cursor: zoom-in;
+  }
+
+  .photo-card:hover .polaroid { box-shadow: 0 12px 40px rgba(0,0,0,0.7); }
+
+  .polaroid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: opacity 0.15s ease;
+  }
+
+  /* Arrows */
+  .arrow {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(249,115,22,0.6);
+    background: rgba(20,20,20,0.95);
+    color: #f97316;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.15s ease, color 0.15s ease;
+    z-index: 10;
+    padding: 0;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .arrow:hover { background: #f97316; color: #111; border-color: #f97316; }
+  .arrow-left  { left: -14px; }
+  .arrow-right { right: -14px; }
+
+  /* Dots */
+  .dots { display: flex; justify-content: center; gap: 5px; margin-top: 8px; }
+  .dot { width: 5px; height: 5px; border-radius: 50%; background: #555; transition: background 0.2s; }
+  .dot.active { background: #f97316; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox-polaroid {
+    background: #eee;
+    padding: 12px 12px 48px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    max-width: min(400px, 85vw);
+    animation: lbIn 0.2s ease;
+    cursor: default;
+    position: relative;
+  }
+
+  @keyframes lbIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  .lightbox-polaroid img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .lightbox-caption {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 0; right: 0;
+    padding: 0 10px;
+    line-height: 1.4;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.15s;
+  }
+  .lightbox-close:hover { color: #fff; }
+
+  /* Contacts */
+  .contacts {
+    padding: 3.5rem 0;
+    border-top: 1px solid #222;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    text-align: center;
+  }
+
+  .contacts.visible { opacity: 1; transform: none; }
+
+  .contact-list {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    text-align: left;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .contact-item svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    fill: #888;
+  }
+
+  .c-label { color: #888; font-size: 1rem; font-weight: 400; white-space: nowrap; }
+  .c-value { color: #ddd; font-size: 1rem; font-weight: 700; white-space: nowrap; transition: color 0.15s; }
+  .contact-item:hover .c-value { color: #f97316; }
+
+  /* Webring */
+  footer {
+    border-top: 1px solid #222;
+    padding: 3rem 0 4rem;
+    text-align: center;
+  }
+
+  .webring {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .webring a {
+    color: #bbb;
+    text-decoration: none;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.95rem;
+    font-family: 'Open Sans', sans-serif;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .webring a:hover { background: #f97316; color: #000; }
+
+  .webring-mid {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border-left: 1px solid #2a2a2a;
+    border-right: 1px solid #2a2a2a;
+  }
+
+  @media (max-width: 580px) {
+    .section,
+    .section:nth-child(even) { grid-template-columns: 1fr; }
+    .section:nth-child(even) .photo { order: unset; }
+    .photo { display: none; }
+    .intro-line { font-size: 1.5rem; }
+  }
+</style>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="https://foxfil.xyz" class="menu-button active">Home</a>
-      <a href="https://foxfil.xyz/about" class="menu-button">About me</a>
-      <a href="https://foxfil.xyz/contacts" class="menu-button">Contacts</a>
-    </nav>
-  </header>
-  <main>
-    <h1>
-      Hey, I'm <span class="gradient-text-1">FoxFil</span>
-    </h1>
-      <p id="subtext" class="typing"></p>
-  </main>
+<div class="page">
+
+  <section class="section">
+    <div class="text">
+      <strong class="intro-line">Hello, I'm <span>FoxFil</span> 👋</strong>
+      <p>My real name is Filipp. I'm from Moscow (Russia), but currently I study in Palaiseau, France on a Computer Science & Mathematics double major Bachelor program. On this website you can learn more about me and what I like 😊 Next to every paragraph you can see several photos (only from PC) and enlarge them if needed. Have a great visit! 😀</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p1">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <p>I use Windows 11 (surely I'll migrate to Linux one day 😏) and the main language I code with is Python. I also know basics of some other programming languages and frameworks. I like participating in hackathons and programming related competitions, either alone or with friends, as well as doing some fun projects.</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p2">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <p>When I'm not coding, I like to go outside and touch some grass. 🌳 To be more precise, I LOVE <a href="https://www.geocaching.com/play" style="color:#007d46">Geocaching</a> - worldwide treasure hunt game. Basically players hide containers all over the world for other players to find. This is my biggest hobby, that's why I decided to dedicate it a whole paragraph, haha. 😁 Go try it out, it's so much fun!</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p3">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <p>My other hobbies are plates-spotting 🚗, <a href="https://www.geoguessr.com/user/6304b4a3123f19e84b3d7c45" style="color:#CC302E">GeoGuessr</a> 📍 (and co-op Steam games), watching YouTube, movies and series 🍿. Of course I also listen to music, some of my top Russian artists are Noize MC, Monetochka, Oxxxymiron and Pornofilmy. I also listen to Imagine Dragons, twenty one pilots, Arrested Youth and AJR.</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p4">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <p>Oh, and I also have a veeeeeeeeeeeeeery long streak in Duolingo (he's holding my family hostage 🤐). I've studied several languages there but now I usually just play chess with Oscar, lol ♟️. By the way, as for the languages, I obviously know Russian, I have C1 (advanced) in English, and B2 (intermediate) in French. 🥖</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p5">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <section class="section">
+    <div class="text">
+      <p>I think that's all for now, feel free to contact me using the links below. Btw this page was mostly <em>~vibe~</em> coded using Claude Sonnet 4.6, so I'm sorry if there are any bugs. Good luck!👋</p>
+    </div>
+    <div class="photo"><div class="photo-card" id="p6">
+      <button class="arrow arrow-left">&#8249;</button>
+      <div class="polaroid"><img src="" alt=""></div>
+      <button class="arrow arrow-right">&#8250;</button>
+      <div class="dots"></div>
+    </div></div>
+  </section>
+
+  <!-- Contacts -->
+  <div class="contacts">
+    <div class="contact-list">
+
+      <a class="contact-item" href="https://telegram.me/foxfil" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.19 13.9l-2.965-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.963.659z"/></svg>
+        <span class="c-label">Telegram:</span><span class="c-value">@FoxFil</span>
+      </a>
+
+      <a class="contact-item" href="https://www.linkedin.com/in/filipp-vesker/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <span class="c-label">LinkedIn:</span><span class="c-value">filipp-vesker</span>
+      </a>
+
+      <a class="contact-item" href="https://github.com/foxfil" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        <span class="c-label">GitHub:</span><span class="c-value">FoxFil</span>
+      </a>
+
+      <a class="contact-item" href="https://steamcommunity.com/id/FoxFil/" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.718L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.606 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.497 1.009 2.455-.397.957-1.497 1.41-2.455 1.012zm11.342-9.303c0-1.662-1.35-3.012-3.011-3.012-1.664 0-3.013 1.35-3.013 3.012 0 1.664 1.349 3.013 3.013 3.013 1.661 0 3.011-1.349 3.011-3.013zm-5.271.002c0-1.25 1.013-2.263 2.261-2.263 1.249 0 2.263 1.013 2.263 2.263 0 1.248-1.014 2.262-2.263 2.262-1.248 0-2.261-1.014-2.261-2.262z"/></svg>
+        <span class="c-label">Steam:</span><span class="c-value">FoxFil</span>
+      </a>
+
+      <a class="contact-item" href="mailto:filipp.vesker@gmail.com">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <span class="c-label">Email:</span><span class="c-value">filipp.vesker@gmail.com</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- Webring -->
   <footer>
-    <nav>
-      <a href="https://otomir23.me/webring/9/prev" class="footer-button">← prev</a>
-      <a href="https://otomir23.me/webring" class="footer-button">[webring]</a>
-      <a href="https://otomir23.me/webring/9/next" class="footer-button">next →</a>
-    </nav>
+    <div class="webring">
+      <a href="https://otomir23.me/webring/9/prev">&#8592; prev</a>
+      <a href="https://otomir23.me/webring" class="webring-mid">webring</a>
+      <a href="https://otomir23.me/webring/9/next">next &#8594;</a>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose">&#215;</button>
+  <div class="lightbox-polaroid">
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<script>
+  const pools = {
+    p1: {
+      imgs: [
+        "pics/MeBurgerKing.JPG",
+        "pics/MeNerd.JPG",
+        "pics/MeOfficial.JPG",
+        "pics/MeOrange.JPG",
+      ],
+      captions: [
+        "Burger King 👑 > McDonald's 🤢🤮",
+        "Do not call me a 🤓",
+        "so-called professional suit",
+        "me with an orange 🟠 orange 🍊"
+      ]
+    },
+    p2: {
+      imgs: [
+        "pics/MeHappySchool.JPG",
+        "pics/Me4.JPG",
+        "pics/MeALot.JPG",
+      ],
+      captions: [
+        "happy me graduating from the high school 😊",
+        "me holding me & me & me & me",
+        "oh that's a lot of me. maybe too much..."
+      ]
+    },
+    p3: {
+      imgs: [
+        "pics/BigCache.JPG",
+        "pics/GeoParis.JPG",
+        "pics/LittleCache.JPG",
+        "pics/MeOldestFrench.JPG",
+        "pics/MeOnTree.JPG",
+      ],
+      captions: [
+        "oooo look at this big cache 😋",
+        "this one is right in front of the Eiffel Tower!",
+        "little cache in the plain sight",
+        "me finding the oldest active geocache of France! it was placed in 2001 😮",
+        "me on the tree tring to find a geocache in Cannes, France",
+      ]
+    },
+    p4: {
+      imgs: [
+        "pics/MeAndorra.JPG",
+        "pics/NoizeMC.jpg",
+      ],
+      captions: [
+        "me spotting Andorra's plate in Lisbon, Portugal",
+        "me on the NoizeMC concert in Paris (September 2025) 🎸",
+      ]
+    },
+    p5: {
+      imgs: [
+        "pics/MeBaguette.JPG",
+        "pics/MeFat.JPG"
+      ],
+      captions: [
+        "me with a baguette 🥖",
+        "me if a box of cereal that says it contains 18 meals really did contain 18 meals"
+      ]
+    },
+    p6: {
+      imgs: [
+        "pics/MeUnprofessional.JPG",
+        "pics/MeDiddy.JPG",
+        "pics/Me25.JPG",
+        "pics/WhiteCircle.JPG"
+      ],
+      captions: [
+        "so-called unprofessional suit",
+        "me-diddy",
+        "need to wait 25 more seconds :(",
+        "oops happened on this place in Florence, Italy 400 years ago"
+      ]
+    },
+  };
+
+  const rotations = [-5, -3, -2, 2, 3, 5, 6, -6, 4, -4];
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lbImg');
+  const lbCap    = document.getElementById('lbCaption');
+
+  function openLightbox(src, caption) {
+    lbImg.src = src;
+    lbCap.textContent = caption;
+    lightbox.classList.add('open');
+  }
+
+  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+
+  // Cards
+  Object.keys(pools).forEach(id => {
+    const card = document.getElementById(id);
+    if (!card) return;
+    const { imgs, captions } = pools[id];
+    const img    = card.querySelector('img');
+    const dotsEl = card.querySelector('.dots');
+    const btnL   = card.querySelector('.arrow-left');
+    const btnR   = card.querySelector('.arrow-right');
+
+    let idx = Math.floor(Math.random() * imgs.length);
+    const rot = rotations[Math.floor(Math.random() * rotations.length)];
+    card.style.transform = `rotate(${rot}deg)`;
+
+    imgs.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === idx ? ' active' : '');
+      dotsEl.appendChild(d);
+    });
+
+    function show(n) {
+      idx = (n + imgs.length) % imgs.length;
+      img.style.opacity = 0;
+      setTimeout(() => { img.src = imgs[idx]; img.style.opacity = 1; }, 150);
+      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    img.src = imgs[idx];
+
+    card.querySelector('.polaroid').addEventListener('click', () => openLightbox(imgs[idx], captions[idx]));
+    btnL.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
+    btnR.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section, .contacts').forEach(s => observer.observe(s));
+</script>
 </body>
 </html>
