@@ -1,4 +1,4 @@
-<!-- This page was mostly vibecoded using Claude Sonnet 4.6 :) -->
+<!-- This page was mostly vibecoded using Claude Sonnet 5.5 :) -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@
 <meta name="description" content="FoxFil's website">
 <meta property="og:image" content="pics/MeNerd.jpg">
 <link rel="icon" href="pics/avatar.jpg">
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,182 +20,23 @@
     font-weight: 400;
     font-size: 17px;
     line-height: 1.85;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
   }
 
   .page {
+    width: 100%;
     max-width: 780px;
-    margin: 0 auto;
+    margin: auto;
     padding: 0 2rem;
   }
-
-  /* Sections */
-  .section {
-    padding: 3.5rem 0;
-    border-top: 1px solid #222;
-    display: grid;
-    grid-template-columns: 1fr 180px;
-    gap: 2.5rem;
-    align-items: start;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
-
-  .section:first-child { border-top: none; padding-top: 5rem; }
-  .section.visible { opacity: 1; transform: none; }
-  .section:nth-child(even) { grid-template-columns: 180px 1fr; }
-  .section:nth-child(even) .photo { order: -1; }
-  .section p { color: #bbb; font-size: 1rem; }
-
-  .intro-line {
-    display: block;
-    font-size: 1.9rem;
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.3;
-    margin-bottom: 0.75rem;
-  }
-  .intro-line span { color: #f97316; }
-
-  /* Photo card */
-  .photo { display: flex; justify-content: center; padding-top: 0.5rem; }
-
-  .photo-card {
-    position: relative;
-    width: 165px;
-    transition: transform 0.3s ease;
-  }
-
-  .photo-card:hover { transform: rotate(0deg) scale(1.06) !important; }
-  .photo-card:hover .arrow { opacity: 1; }
-
-  .polaroid {
-    background: #eee;
-    padding: 8px 8px 22px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
-    width: 165px;
-    cursor: zoom-in;
-  }
-
-  .photo-card:hover .polaroid { box-shadow: 0 12px 40px rgba(0,0,0,0.7); }
-
-  .polaroid img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    transition: opacity 0.15s ease;
-  }
-
-  /* Arrows */
-  .arrow {
-    position: absolute;
-    top: 42%;
-    transform: translateY(-50%);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(249,115,22,0.6);
-    background: rgba(20,20,20,0.95);
-    color: #f97316;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s ease, background 0.15s ease, color 0.15s ease;
-    z-index: 10;
-    padding: 0;
-    line-height: 1;
-    user-select: none;
-  }
-
-  .arrow:hover { background: #f97316; color: #111; border-color: #f97316; }
-  .arrow-left  { left: -14px; }
-  .arrow-right { right: -14px; }
-
-  /* Dots */
-  .dots { display: flex; justify-content: center; gap: 5px; margin-top: 8px; }
-  .dot { width: 5px; height: 5px; border-radius: 50%; background: #555; transition: background 0.2s; }
-  .dot.active { background: #f97316; }
-
-  /* Lightbox */
-  .lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.88);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0;
-    cursor: zoom-out;
-  }
-
-  .lightbox.open { display: flex; }
-
-  .lightbox-polaroid {
-    background: #eee;
-    padding: 12px 12px 48px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-    max-width: min(400px, 85vw);
-    animation: lbIn 0.2s ease;
-    cursor: default;
-    position: relative;
-  }
-
-  @keyframes lbIn {
-    from { opacity: 0; transform: scale(0.92); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-
-  .lightbox-polaroid img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-  }
-
-  .lightbox-caption {
-    font-family: 'Open Sans', sans-serif;
-    font-style: italic;
-    font-size: 0.8rem;
-    color: #888;
-    text-align: center;
-    position: absolute;
-    bottom: 10px;
-    left: 0; right: 0;
-    padding: 0 10px;
-    line-height: 1.4;
-  }
-
-  .lightbox-close {
-    position: fixed;
-    top: 1.2rem;
-    right: 1.5rem;
-    background: none;
-    border: none;
-    color: #555;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
-    transition: color 0.15s;
-  }
-  .lightbox-close:hover { color: #fff; }
 
   /* Contacts */
   .contacts {
     padding: 3.5rem 0;
-    border-top: 1px solid #222;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
     text-align: center;
   }
-
-  .contacts.visible { opacity: 1; transform: none; }
 
   .contact-list {
     display: inline-flex;
@@ -256,91 +97,10 @@
     border-left: 1px solid #2a2a2a;
     border-right: 1px solid #2a2a2a;
   }
-
-  @media (max-width: 580px) {
-    .section,
-    .section:nth-child(even) { grid-template-columns: 1fr; }
-    .section:nth-child(even) .photo { order: unset; }
-    .photo { display: none; }
-    .intro-line { font-size: 1.5rem; }
-  }
 </style>
 </head>
 <body>
 <div class="page">
-
-  <section class="section">
-    <div class="text">
-      <strong class="intro-line">Hello, I'm <span>FoxFil</span> 👋</strong>
-      <p>My real name is Filipp. I'm from Moscow (Russia), but currently I study in Palaiseau, France on a Computer Science & Mathematics double major Bachelor program. On this website you can learn more about me and what I like 😊 Next to every paragraph you can see several photos (only from PC) and enlarge them if needed. Have a great visit! 😀</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p1">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
-
-  <section class="section">
-    <div class="text">
-      <p>I use Windows 11 (surely I'll migrate to Linux one day 😏) and the main language I code with is Python. I also know basics of some other programming languages and frameworks. I like participating in hackathons and programming related competitions, either alone or with friends, as well as doing some fun projects.</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p2">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
-
-  <section class="section">
-    <div class="text">
-      <p>When I'm not coding, I like to go outside and touch some grass. 🌳 To be more precise, I LOVE <a href="https://www.geocaching.com/play" style="color:#007d46">Geocaching</a> - worldwide treasure hunt game. Basically players hide containers all over the world for other players to find. This is my biggest hobby, that's why I decided to dedicate it a whole paragraph, haha. 😁 Go try it out, it's so much fun!</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p3">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
-
-  <section class="section">
-    <div class="text">
-      <p>My other hobbies are plates-spotting 🚗, <a href="https://www.geoguessr.com/user/6304b4a3123f19e84b3d7c45" style="color:#CC302E">GeoGuessr</a> 📍 (and co-op Steam games), watching YouTube, movies and series 🍿. Of course I also listen to music, some of my top Russian artists are Noize MC, Monetochka, Oxxxymiron and Pornofilmy. I also listen to Imagine Dragons, twenty one pilots, Arrested Youth and AJR.</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p4">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
-
-  <section class="section">
-    <div class="text">
-      <p>Oh, and I also have a veeeeeeeeeeeeeery long streak in Duolingo (he's holding my family hostage 🤐). I've studied several languages there but now I usually just play chess with Oscar, lol ♟️. By the way, as for the languages, I obviously know Russian, I have C1 (advanced) in English, and B2 (intermediate) in French. 🥖</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p5">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
-
-  <section class="section">
-    <div class="text">
-      <p>I think that's all for now, feel free to contact me using the links below. Btw this page was mostly <em>~vibe~</em> coded using Claude Sonnet 4.6, so I'm sorry if there are any bugs. Good luck!👋</p>
-    </div>
-    <div class="photo"><div class="photo-card" id="p6">
-      <button class="arrow arrow-left">&#8249;</button>
-      <div class="polaroid"><img src="" alt=""></div>
-      <button class="arrow arrow-right">&#8250;</button>
-      <div class="dots"></div>
-    </div></div>
-  </section>
 
   <!-- Contacts -->
   <div class="contacts">
@@ -384,155 +144,5 @@
   </footer>
 
 </div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lbClose">&#215;</button>
-  <div class="lightbox-polaroid">
-    <img id="lbImg" src="" alt="">
-    <div class="lightbox-caption" id="lbCaption"></div>
-  </div>
-</div>
-
-<script>
-  const pools = {
-    p1: {
-      imgs: [
-        "pics/MeBurgerKing.JPG",
-        "pics/MeNerd.JPG",
-        "pics/MeOfficial.JPG",
-        "pics/MeOrange.JPG",
-      ],
-      captions: [
-        "Burger King 👑 > McDonald's 🤢🤮",
-        "Do not call me a 🤓",
-        "so-called professional suit",
-        "me with an orange 🟠 orange 🍊"
-      ]
-    },
-    p2: {
-      imgs: [
-        "pics/MeHappySchool.JPG",
-        "pics/Me4.JPG",
-        "pics/MeALot.JPG",
-      ],
-      captions: [
-        "happy me graduating from the high school 😊",
-        "me holding me & me & me & me",
-        "oh that's a lot of me. maybe too much..."
-      ]
-    },
-    p3: {
-      imgs: [
-        "pics/BigCache.JPG",
-        "pics/GeoParis.JPG",
-        "pics/LittleCache.JPG",
-        "pics/MeOldestFrench.JPG",
-        "pics/MeOnTree.JPG",
-      ],
-      captions: [
-        "oooo look at this big cache 😋",
-        "this one is right in front of the Eiffel Tower!",
-        "little cache in the plain sight",
-        "me finding the oldest active geocache of France! it was placed in 2001 😮",
-        "me on the tree tring to find a geocache in Cannes, France",
-      ]
-    },
-    p4: {
-      imgs: [
-        "pics/MeAndorra.JPG",
-        "pics/NoizeMC.jpg",
-      ],
-      captions: [
-        "me spotting Andorra's plate in Lisbon, Portugal",
-        "me on the NoizeMC concert in Paris (September 2025) 🎸",
-      ]
-    },
-    p5: {
-      imgs: [
-        "pics/MeBaguette.JPG",
-        "pics/MeFat.JPG"
-      ],
-      captions: [
-        "me with a baguette 🥖",
-        "me if a box of cereal that says it contains 18 meals really did contain 18 meals"
-      ]
-    },
-    p6: {
-      imgs: [
-        "pics/MeUnprofessional.JPG",
-        "pics/MeDiddy.JPG",
-        "pics/Me25.JPG",
-        "pics/WhiteCircle.JPG"
-      ],
-      captions: [
-        "so-called unprofessional suit",
-        "me-diddy",
-        "need to wait 25 more seconds :(",
-        "oops happened on this place in Florence, Italy 400 years ago"
-      ]
-    },
-  };
-
-  const rotations = [-5, -3, -2, 2, 3, 5, 6, -6, 4, -4];
-
-  // Lightbox
-  const lightbox = document.getElementById('lightbox');
-  const lbImg    = document.getElementById('lbImg');
-  const lbCap    = document.getElementById('lbCaption');
-
-  function openLightbox(src, caption) {
-    lbImg.src = src;
-    lbCap.textContent = caption;
-    lightbox.classList.add('open');
-  }
-
-  document.getElementById('lbClose').addEventListener('click', () => lightbox.classList.remove('open'));
-  lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
-
-  // Cards
-  Object.keys(pools).forEach(id => {
-    const card = document.getElementById(id);
-    if (!card) return;
-    const { imgs, captions } = pools[id];
-    const img    = card.querySelector('img');
-    const dotsEl = card.querySelector('.dots');
-    const btnL   = card.querySelector('.arrow-left');
-    const btnR   = card.querySelector('.arrow-right');
-
-    let idx = Math.floor(Math.random() * imgs.length);
-    const rot = rotations[Math.floor(Math.random() * rotations.length)];
-    card.style.transform = `rotate(${rot}deg)`;
-
-    imgs.forEach((_, i) => {
-      const d = document.createElement('div');
-      d.className = 'dot' + (i === idx ? ' active' : '');
-      dotsEl.appendChild(d);
-    });
-
-    function show(n) {
-      idx = (n + imgs.length) % imgs.length;
-      img.style.opacity = 0;
-      setTimeout(() => { img.src = imgs[idx]; img.style.opacity = 1; }, 150);
-      dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
-    }
-
-    img.src = imgs[idx];
-
-    card.querySelector('.polaroid').addEventListener('click', () => openLightbox(imgs[idx], captions[idx]));
-    btnL.addEventListener('click', e => { e.stopPropagation(); show(idx - 1); });
-    btnR.addEventListener('click', e => { e.stopPropagation(); show(idx + 1); });
-  });
-
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('.section, .contacts').forEach(s => observer.observe(s));
-</script>
 </body>
 </html>
